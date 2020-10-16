@@ -14,7 +14,7 @@ def merge_sort(arr)
         return new_array
     else
         sorted_left = merge_sort(arr.slice(0, arr.length / 2))
-        sorted_right = merge_sort(arr.slice(arr.length / 2, arr.length / 2))
+        sorted_right = merge_sort(arr.slice(arr.length / 2..-1))
         merge(sorted_left, sorted_right)
     end
 end
@@ -31,4 +31,4 @@ def merge(l,r)
     end
 end
 
-print merge_sort([5,2,9,1,0,10,20,15]).to_s + "\n"
+print merge_sort([5,2,9,0,1,10,20,15]).to_s + "\n"

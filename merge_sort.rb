@@ -13,32 +13,22 @@ def merge_sort(arr)
         new_array += [arr[0], arr[1]]
         return new_array
     else
-        new_array.push(merge_sort(arr.slice(0, arr.length / 2)))
-        new_array.push(merge_sort(arr.slice(arr.length / 2, arr.length / 2)))
-        #merge(arr.slice(0, arr.length / 2), arr.slice(arr.length / 2, arr.length / 2))
-        #new_array.flatten!
+        sorted_left = merge_sort(arr.slice(0, arr.length / 2))
+        sorted_right = merge_sort(arr.slice(arr.length / 2, arr.length / 2))
+        merge(sorted_left, sorted_right)
     end
-
-    return new_array
 end
 
 def merge(l,r)
-    compare_l = l[0]
-    compare_r = r[0]
-    new_array = []
-
-    if compare_l < compare_r
-        new_array.push(compare_l)
-        l.shift
-    elsif compare_r < compare_l
-        new_array.push(compare_r)
-        r.shift
+    if l.empty?
+        r
+    elsif r.empty?
+        l
+    elsif l[0] < r[0]
+        [l[0]] + merge(l[1..l.length], r)
     else
-        new_array.push(compare_l)
-        l.shift
+        [r[0]] + merge(l, r[1..r.length])
     end
-
-    print "merge " + new_array.to_s + "\n"
 end
 
 print merge_sort([5,2,9,1,0,10,20,15]).to_s + "\n"
